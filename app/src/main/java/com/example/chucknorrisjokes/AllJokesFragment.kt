@@ -1,14 +1,30 @@
 package com.example.chucknorrisjokes
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import com.example.chucknorrisjokes.Adapters.RandomJokeAdapter
+import com.example.chucknorrisjokes.Model.Batches.JokesList
+import com.example.chucknorrisjokes.Model.Object
+import com.example.chucknorrisjokes.ViewModel.JokesViewModel
+import kotlinx.android.synthetic.main.fragment_all_jokes.view.*
 
 class AllJokesFragment : Fragment() {
+
+    private lateinit var adapter: RandomJokeAdapter
+    private lateinit var myRecyclerView:RecyclerView
+    private lateinit var allJokeList:JokesList
+    private lateinit var progressBar: ProgressBar
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -27,8 +43,33 @@ class AllJokesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_jokes, container, false)
+
+        val jokeView = inflater.inflate(R.layout.fragment_all_jokes, container, false)
+
+        progressBar = jokeView.progressBar
+        showProgressView()
+        myRecyclerView = jokeView.jokes_recycler
+        myRecyclerView.layoutManager = LinearLayoutManager(context,LinearLayout.VERTICAL,false)
+
+        val model = ViewModelProviders.of(this).get(JokesViewModel::class.java!!)
+
+        model.allJokes.observe(this, Observer<JokesList> { allList ->
+            allJokeList = allList!!
+            adapter = RandomJokeAdapter(context,allJokeList)
+            myRecyclerView.adapter = adapter
+        })
+        hideProgressView()
+        return jokeView
     }
+
+    fun showProgressView() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideProgressView() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {

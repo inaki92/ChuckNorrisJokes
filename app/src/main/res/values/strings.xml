@@ -6,7 +6,15 @@
     <string name="all_jokes">All Jokes</string>
     <string name="random_jokes">Random Jokes</string>
     <string name="character_changed">Character changed</string>
+    <string name="warningMSG">Enter a valid Name and LastName</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="joke_here">JOKE HERE</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="joke_number">Joke Number:</string>
+    <string name="textview">TextView</string>
+    <string name="chuck_norris">CHUCK NORRIS</string>
+    <string name="app">APP</string>
+    <string name="jokes_lo">JOKES</string>
 </resources>

@@ -7,8 +7,16 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_character.view.*
 
 class CharacterFragment : Fragment() {
+
+    private val TAG = "JokesDialogFragment"
+
+    private lateinit var name:String
+    private lateinit var lastname:String
+    private lateinit var fName:String
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -26,8 +34,40 @@ class CharacterFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_character, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_character,container,false)
+
+        var charDialog:CharDialogFragment
+
+        val button = view.sub_btn
+        button.setOnClickListener {
+
+            name = view.character_name.text.toString()
+
+            if(view.character_name.text.isNotEmpty()){
+                val str = name
+                val reg = Regex(" ")
+                val list = str.split(reg)
+                fName = list[0]
+
+                if (list.size < 2 || list.size > 2){
+                    Toast.makeText(context,"Enter a valid Name and LastName",Toast.LENGTH_LONG).show()
+                }else {
+                    lastname = list[1]
+                    val args = Bundle()
+                    args.putString("name", fName)
+                    args.putString("lastname", lastname)
+                    charDialog = CharDialogFragment()
+                    charDialog.arguments = args
+                    charDialog.show(fragmentManager, "CharDialogFragment")
+                }
+
+            }else{
+                Toast.makeText(context,"Enter a valid Name and LastName",Toast.LENGTH_LONG).show()
+            }
+
+        }
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event
