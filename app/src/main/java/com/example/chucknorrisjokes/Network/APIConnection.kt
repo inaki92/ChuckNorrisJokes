@@ -17,4 +17,7 @@ interface APIConnection {
 
     @GET(APIRequest.CHARACTER_CHANGED)
     fun getChar(@Query("firstName") newName: String, @Query("lastName") lastName: String): Call<Object>
+
+    @get:GET(APIRequest.EXCLUDE_EXPLICIT_URL)
+    val excludeJoke: Call<Object>
 }

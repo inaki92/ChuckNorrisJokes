@@ -48,7 +48,7 @@ class CharDialogFragment : DialogFragment() {
             charList = jokesObject
             assert(charList != null)
             mJoke!!.text = charList!!.value!!.joke
-            idJoke!!.text = charList!!.value!!.id
+            idJoke!!.text = charList!!.value!!.id.toString()
         })
 
         mDismiss.setOnClickListener {

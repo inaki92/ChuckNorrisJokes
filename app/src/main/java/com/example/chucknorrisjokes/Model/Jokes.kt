@@ -7,12 +7,12 @@ class Jokes {
 
     @SerializedName("id")
     @Expose
-    var id: String? = null
+    var id: Int? = null
     @SerializedName("joke")
     @Expose
     var joke: String? = null
     @SerializedName("categories")
     @Expose
-    var categories: List<Object>? = null
+    var categories: List<String>? = null
 
 }

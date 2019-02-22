@@ -11,21 +11,23 @@ import android.widget.TextView;
 import com.example.chucknorrisjokes.Model.Batches.JokesList;
 import com.example.chucknorrisjokes.R;
 
-public class RandomJokeAdapter extends RecyclerView.Adapter<RandomJokeAdapter.RandomViewHolder> {
+public class RandomJokeAdapter extends RecyclerView.Adapter<RandomJokeAdapter.JokesViewHolder> {
+
+    private static final String TAG = "RandomJokeAdapter";
 
     private Context mCtx;
     private JokesList JokeList;
 
-    public RandomJokeAdapter(Context mCtx, JokesList jokeList){
+    public RandomJokeAdapter(Context mCtx, JokesList jokeList) {
         this.mCtx = mCtx;
         this.JokeList = jokeList;
     }
 
-    class RandomViewHolder extends RecyclerView.ViewHolder{
+    static class JokesViewHolder extends RecyclerView.ViewHolder{
 
         TextView joke, id_joke;
 
-        public RandomViewHolder(@NonNull View itemView) {
+        JokesViewHolder(@NonNull View itemView) {
             super(itemView);
 
             joke = itemView.findViewById(R.id.joke);
@@ -33,20 +35,20 @@ public class RandomJokeAdapter extends RecyclerView.Adapter<RandomJokeAdapter.Ra
         }
     }
 
-
     @NonNull
     @Override
-    public RandomJokeAdapter.RandomViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public JokesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
         View view = LayoutInflater.from(mCtx).inflate(R.layout.jokes_list_cards,viewGroup,false);
-        return new RandomViewHolder(view);
+        return new JokesViewHolder(view);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull RandomJokeAdapter.RandomViewHolder randomViewHolder, int i) {
+    public void onBindViewHolder(@NonNull JokesViewHolder viewHolder, int i) {
 
-        randomViewHolder.joke.setText(JokeList.getValue().get(i).getJoke());
-        randomViewHolder.id_joke.setText(JokeList.getValue().get(i).getId());
-
+        viewHolder.joke.setText(JokeList.getValue().get(i).getJoke());
+        viewHolder.id_joke.setText(JokeList.getValue().get(i).getId());
     }
 
     @Override

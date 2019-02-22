@@ -12,19 +12,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import com.example.chucknorrisjokes.Adapters.RandomJokeAdapter
 import com.example.chucknorrisjokes.Model.Batches.JokesList
-import com.example.chucknorrisjokes.Model.Object
+
 import com.example.chucknorrisjokes.ViewModel.JokesViewModel
 import kotlinx.android.synthetic.main.fragment_all_jokes.view.*
 
+
 class AllJokesFragment : Fragment() {
 
-    private lateinit var adapter: RandomJokeAdapter
+    private lateinit var mAdapter: RandomJokeAdapter
     private lateinit var myRecyclerView:RecyclerView
-    private lateinit var allJokeList:JokesList
-    private lateinit var progressBar: ProgressBar
+    private lateinit var allJokeList: JokesList
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -46,29 +45,27 @@ class AllJokesFragment : Fragment() {
 
         val jokeView = inflater.inflate(R.layout.fragment_all_jokes, container, false)
 
-        progressBar = jokeView.progressBar
-        showProgressView()
         myRecyclerView = jokeView.jokes_recycler
+
+        myRecyclerView.setHasFixedSize(true)
         myRecyclerView.layoutManager = LinearLayoutManager(context,LinearLayout.VERTICAL,false)
 
-        val model = ViewModelProviders.of(this).get(JokesViewModel::class.java!!)
+        load()
 
-        model.allJokes.observe(this, Observer<JokesList> { allList ->
-            allJokeList = allList!!
-            adapter = RandomJokeAdapter(context,allJokeList)
-            myRecyclerView.adapter = adapter
-        })
-        hideProgressView()
         return jokeView
     }
 
-    fun showProgressView() {
-        progressBar.visibility = View.VISIBLE
-    }
 
-    fun hideProgressView() {
-        progressBar.visibility = View.INVISIBLE
-    }
+    private fun load() {
+
+        val model = ViewModelProviders.of(this).get(JokesViewModel::class.java)
+
+        model.allJokes.observe(this, Observer<JokesList> { allList ->
+            allJokeList = allList!!
+            mAdapter = RandomJokeAdapter(context,allJokeList)
+            myRecyclerView.adapter = mAdapter
+        })
+        }
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -102,6 +99,7 @@ class AllJokesFragment : Fragment() {
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private val ARG_PARAM1 = "param1"
         private val ARG_PARAM2 = "param2"
+        private const val TAG = "AllJokesFragment"
 
         // TODO: Rename and change types and number of parameters
         fun newInstance(param1: String, param2: String): AllJokesFragment {

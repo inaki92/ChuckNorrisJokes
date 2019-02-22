@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/random_jokes"
@@ -10,7 +11,6 @@
         android:id="@+id/chage_character"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/character_changed" />
-
     <item
         android:id="@+id/all_jokes"
         android:icon="@drawable/ic_all_inclusive_black_24dp"

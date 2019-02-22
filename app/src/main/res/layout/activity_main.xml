@@ -12,13 +12,39 @@
         android:id="@+id/navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
+        app:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/navigation">
+
+    </android.support.design.widget.BottomNavigationView>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/explicit_nav"
+        android:layout_width="450dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Switch
+            android:id="@+id/no_explicit_sw"
+            android:layout_width="183dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="240dp"
+            android:text="No Explicit"
+            android:textSize="24sp" />
+
+    </android.support.design.widget.BottomNavigationView>
+
 
     <TextView
         android:id="@+id/chuckNorris"
@@ -35,8 +61,8 @@
         app:layout_constraintBottom_toTopOf="@+id/chuck_norris"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/explicit_nav"
+        app:layout_constraintVertical_bias="0.821" />
 
     <TextView
         android:id="@+id/app_norris"
